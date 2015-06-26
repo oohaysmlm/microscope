@@ -2,8 +2,12 @@
  * Created by Steven on 6/20/2015.
  */
 
-Meteor.publish('posts', function() {
-    return Posts.find();
+Meteor.publish('posts', function(options) {
+    check(options, {
+        sort: Object,
+        limit: Number
+    });
+    return Posts.find({}, options);
 });
 
 Meteor.publish('comments', function(postId) {
